@@ -7,6 +7,7 @@ export default {
     return { name: "transferencia", region: "us-east-1" };
   },
   stacks(app) {
-    app.stack(StorageStack).stack(ApiStack);
+    app.stack(StorageStack)
+    .stack(ApiStack)
   },
 } satisfies SSTConfig;

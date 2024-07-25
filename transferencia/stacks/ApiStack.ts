@@ -1,5 +1,7 @@
 import { Api, StackContext, use } from "sst/constructs";
 import { StorageStack } from "./StorageStack";
+import { productRoutes } from "./routes/productRoutes";
+import { comprasRoutes } from "./routes/comprasRoutes";
 
 export function ApiStack({ stack }: StackContext) {
   const { table } = use(StorageStack);
@@ -12,10 +14,8 @@ export function ApiStack({ stack }: StackContext) {
       },
     },
     routes: {
-      "POST /products": "packages/functions/src/products/createProduct.main",
-      "GET /products": "packages/functions/src/products/getAllProducts.main",
-      //"GET /product/{id}": "packages/functions/src/getProduct.main",
-      "DELETE /products/{id}": "packages/functions/src/products/deleteProduct.main",
+      ...productRoutes,
+      ...comprasRoutes,
     }
   });
 

@@ -1,27 +1,15 @@
 import { Table } from "sst/node/table";
 import handler from "@transferencia/core/handler";
 import dynamoDb from "@transferencia/core/dynamodb";
-
-
-//AUTOINCREMENTAL
-//begin_whit pk???
-
+import { Product } from "models/product";
 
 export const main = handler(async (event) => {
-  let data = {
-    productoNombre: "",
-    tipo: "",
-    estado: true,
-    detalle: "",
-    puntuacion: 0,
-    precio: 0,
-    cantidadDisponible: 0,
-    marca: "",
-    imagen: ""
-  };
+  let data : Product
 
   if (event.body != null) {
     data = JSON.parse(event.body);
+  }else {
+    throw new Error("Invalid request: No data provided");
   }
 
   const params = {

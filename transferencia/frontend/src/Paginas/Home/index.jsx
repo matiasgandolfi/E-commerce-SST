@@ -21,7 +21,6 @@ function Home() {
         )
       }
     }  
-
     return (
       <>
         <Layout>

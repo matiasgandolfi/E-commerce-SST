@@ -2,28 +2,77 @@ import { Table } from "sst/node/table";
 import handler from "@transferencia/core/handler";
 import dynamoDb from "@transferencia/core/dynamodb";
 
-export const main = handler(async (event) => {
-  let data = {
-    pk: "",
-    sk: ""
-  };
 
-  if (event.body != null) {
-    data = JSON.parse(event.body);
+
+const setParams : any = (evento : any) => {
+  let data = {
+    pk: null,
+    sk: null,
+    marca: null
+  };
+  
+  if(evento.body) {
+    data = JSON.parse(evento.body);
   }
 
-  const params = {
-    TableName: Table.OnlineShop.tableName,
-    KeyConditionExpression: "#pk = :pkPrefix AND begins_with(#sk, :skPrefix)",
-    ExpressionAttributeNames: {
-      "#pk": "pk",
-      "#sk": "sk"
-    },
-    ExpressionAttributeValues: {
-      ":pkPrefix": "PRODUCTOS#Televisor",
-      ":skPrefix": "LG#"
-    }
-  };
+  if(data.sk){
+    const parametros = {
+      TableName: Table.OnlineShop.tableName,
+      KeyConditionExpression: "#pk = :pkPrefix AND begins_with(#sk, :skPrefix)",
+      ExpressionAttributeNames: {
+        "#pk": "pk",
+        "#sk": "sk"
+      },
+      ExpressionAttributeValues: {
+        ":pkPrefix": "PRODUCTOS#Televisor",
+        ":skPrefix": `${data.sk}`
+
+      }
+    };
+    console.log(1)
+    return parametros;
+  }
+  else if(data.sk && data.marca){
+    const parametros = {
+      TableName: Table.OnlineShop.tableName,
+      KeyConditionExpression: "#pk = :pkPrefix AND begins_with(#sk, :skPrefix)",
+      ExpressionAttributeNames: {
+        "#pk": "pk",
+        "#sk": "sk"
+      },
+      ExpressionAttributeValues: {
+        ":pkPrefix": "PRODUCTOS#Televisor",
+        ":skPrefix": `${data.sk}#${data.marca}`
+      }
+    };
+    console.log(2);
+    return parametros;
+  }
+  else {    //Traer todos
+    const parametros = {
+      TableName: Table.OnlineShop.tableName,
+      KeyConditionExpression: "#pk = :pkPrefix AND begins_with(#sk, :skPrefix)",
+      ExpressionAttributeNames: {
+        "#pk": "pk",
+        "#sk": "sk"
+      },
+      ExpressionAttributeValues: {
+        ":pkPrefix": "PRODUCTOS#Televisor",
+        ":skPrefix" : "LG"
+      }
+    };
+    console.log(3)
+    return parametros;
+  }
+}
+
+
+
+
+
+
+export const main = handler(async (event) => {
+  const params = setParams(event);
 
   console.log("Query parameters:", params);
 

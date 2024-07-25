@@ -5,6 +5,8 @@ import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid"
 
 const Card = (data) => {
     const context = useContext(ShoppingCartContext)
+
+    const products = context.products;
   
     const showProduct = (productDetail) => {
       context.openProductDetail()

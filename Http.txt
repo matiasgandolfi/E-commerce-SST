@@ -1,0 +1,18 @@
+//createProduct
+
+
+PS C:\Users\Matias> $body = @{
+  productoId = "Televisor"
+  productoNombre = "SAMSUNG"
+  estado = $true
+  detalle = "TELEVISOR SAMSUNG TV 50 pulgados"
+  puntuacion = 4.3
+  precio = 500000
+  cantidad = 1
+  cantidadDisponible = 10
+  marca = LG
+}
+
+$jsonBody = $body | ConvertTo-Json
+
+Invoke-RestMethod -Method Post -Uri "https://29cu776ppk.execute-api.us-east-1.amazonaws.com/product" -Body $jsonBody -ContentType "application/json"

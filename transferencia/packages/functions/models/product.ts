@@ -1,4 +1,4 @@
-export interface product{
+export interface Product{
     
     pk: string;         //PRODUCTOS#TIPO
     sk: string;         //PRODUCTO#NOMBRE
@@ -11,4 +11,5 @@ export interface product{
     createdAt: Date;
     tipo: string;
     marca: string;
+    imagen: string
 }
