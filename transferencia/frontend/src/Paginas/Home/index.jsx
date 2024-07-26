@@ -8,7 +8,6 @@ function Home() {
   const context = useContext(ShoppingCartContext);
 
 
-    console.log("Esta pagina es Home");
     const renderView = () => {
       if (context.products?.length > 0){
           return(

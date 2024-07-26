@@ -4,6 +4,12 @@ import dynamoDb from "@transferencia/core/dynamodb";
 import { Purchase } from "../../models/purchase "
 import { Product } from "a../../models/product";
 
+function generateFourDigitNumber() {
+  return Math.floor(1000 + Math.random() * 9000);
+}
+
+
+
 export const main = handler(async (event) => {
   let data : Purchase
 
@@ -12,6 +18,9 @@ export const main = handler(async (event) => {
   }else {
     throw new Error("Invalid request: No data provided");
 }
+
+const fourDigitNumber = generateFourDigitNumber();
+
 
 const totalPrice = (productos : Product[]) =>{
   let sum = 0;
@@ -25,8 +34,8 @@ const totalPrice = (productos : Product[]) =>{
     TableName: Table.OnlineShop.tableName,
     Item: {
       pk: `PURCHASE`,
-      sk: `USER#${data.state}`,
-      createdAt: data.createdAt,
+      sk: `USER#${data.state}#${fourDigitNumber}`,
+      createdAt: Date.now,
       address: data.address,
       lastName: data.lastName,
       name: data.name,

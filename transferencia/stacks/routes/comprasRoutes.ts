@@ -1,6 +1,6 @@
-export const comprasRoutes = {
-    // "POST /products": "packages/functions/src/products/createProduct.main",
-    "GET /compras": "packages/functions/src/products/getAllProducts.main",
-    //"GET /product/{id}": "packages/functions/src/getProduct.main",
-    // "DELETE /products/{id}": "packages/functions/src/products/deleteProduct.main",
+export const purchaseRoutes = {
+    "POST /purchase": "packages/functions/src/purchase/createPurchase.main",
+    // "GET /purhcase": "packages/functions/src/purchase/getAllProducts.main",
+    //"GET /product/{id}": "packages/functions/src/purchase/getProduct.main",
+    // "DELETE /products/{id}": "packages/functions/src/purchase/deleteProduct.main",
 };

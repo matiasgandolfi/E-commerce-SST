@@ -1,7 +1,7 @@
 import { Api, StackContext, use } from "sst/constructs";
 import { StorageStack } from "./StorageStack";
 import { productRoutes } from "./routes/productRoutes";
-import { comprasRoutes } from "./routes/comprasRoutes";
+import { purchaseRoutes } from "./routes/comprasRoutes";
 
 export function ApiStack({ stack }: StackContext) {
   const { table } = use(StorageStack);
@@ -15,7 +15,7 @@ export function ApiStack({ stack }: StackContext) {
     },
     routes: {
       ...productRoutes,
-      ...comprasRoutes,
+      ...purchaseRoutes,
     }
   });
 

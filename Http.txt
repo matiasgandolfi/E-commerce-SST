@@ -25,3 +25,39 @@ $body = @{
 $jsonBody = $body | ConvertTo-Json
 
 Invoke-RestMethod -Method Post -Uri "https://29cu776ppk.execute-api.us-east-1.amazonaws.com/products" -Body $jsonBody -ContentType "application/json"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PS C:\Users\Matias> $body = @{
+  state = "Available"
+  name = "iPhone 14 Pro"
+  detail = "Apple-IPhone-14-Pro"
+  price = 1400
+  quantityAvailable = 10
+  category = "Phone"
+  brand = "Apple"
+  images = @(
+    "https://www.apple.com/newsroom/images/product/iphone/geo/Apple-iPhone-14-iPhone-14-Plus-2up-starlight-220907-geo_inline.jpg.large.jpg",
+    "https://www.istore.co.za/media/catalog/product/cache/4ebc814e413626645aa42e369230a31f/i/p/iphone_14_plus_blue-5_2.jpg"
+  )
+}
+
+$jsonBody = $body | ConvertTo-Json
+
+Invoke-RestMethod -Method Post -Uri "https://29cu776ppk.execute-api.us-east-1.amazonaws.com/products" -Body $jsonBody -ContentType "application/json"
