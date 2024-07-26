@@ -5,7 +5,7 @@ import { Purchase } from "../../models/purchase "
 import { Product } from "a../../models/product";
 
 function generateFourDigitNumber() {
-  return Math.floor(1000 + Math.random() * 9000);
+  return Math.floor(1000 + Math.random() * 99999999999);
 }
 
 
