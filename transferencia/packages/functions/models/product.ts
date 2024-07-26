@@ -2,14 +2,14 @@ export interface Product{
     
     pk: string;         //PRODUCTOS#TIPO
     sk: string;         //PRODUCTO#NOMBRE
-    estado: string;     //Disponible - No disponible
-    productoNombre: string;     //NOMBRE
-    detalle: string;
-    puntuacion: number;         //Cantidad de estrellas
-    precio: number;
-    cantidadDisponible: number;
+    state: string;     //Disponible - No disponible
+    name: string;     //NOMBRE
+    detail: string;
+    rating: number;         //Cantidad de estrellas
+    price: number;
+    quantityAvailable: number;
     createdAt: Date;
-    tipo: string;
-    marca: string;
-    imagen: string
+    category: string;
+    brand: string;
+    images: [];
 }

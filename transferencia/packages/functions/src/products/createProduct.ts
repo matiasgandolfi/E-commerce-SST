@@ -3,6 +3,11 @@ import handler from "@transferencia/core/handler";
 import dynamoDb from "@transferencia/core/dynamodb";
 import { Product } from "models/product";
 
+function generateFourDigitNumber() {
+  return Math.floor(1000 + Math.random() * 9000); // Genera un número entre 1000 y 9999
+}
+
+
 export const main = handler(async (event) => {
   let data : Product
 
@@ -12,21 +17,24 @@ export const main = handler(async (event) => {
     throw new Error("Invalid request: No data provided");
   }
 
+  const fourDigitNumber = generateFourDigitNumber();
+
+
   const params = {
     TableName: Table.OnlineShop.tableName,
     Item: {
-      pk: `PRODUCTOS`,
-      sk: `${data.tipo}#${data.marca}#${data.productoNombre}`,
-      estado: data.estado,
-      productoNombre: data.productoNombre,
-      detalle: data.detalle,
-      puntuacion: data.puntuacion,
-      precio: data.precio,
-      cantidadDisponible: data.cantidadDisponible,
-      tipo: data.tipo,
-      marca: data.marca,
+      pk: `PRODUCTS`,
+      sk: `PRODUCT#${data.category}#${data.brand}#${data.name}#${fourDigitNumber}`,
+      state: data.state,
+      name: data.name,
+      detail: data.detail,
+      puntuacion: data.rating,
+      price: data.price,
+      quantityAvailable: data.quantityAvailable,
+      category: data.category,
+      brand: data.brand,
       createdAt: Date.now(),
-      imagen: data.imagen
+      images: data.images
     },
   };
 

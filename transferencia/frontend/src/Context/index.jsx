@@ -35,37 +35,28 @@ export const ShoppingCartProvider = ({children}) => {
     const [products, setProducts] = useState(null);
 
     //Search Product - Home
-    const [searchByTitle, setSearchByTitle] = useState(null);
+    const [searchByName, setSearchByName] = useState(null);
     const [filteredItems, setFilteredItems] = useState(null);
     const [searchByCategory, setSearchByCategory] = useState(null);
-    
-    useEffect(() => {
-        fetch('https://api.escuelajs.co/api/v1/products')
-            .then(response => response.json())
-            .then(data => {
-            setItems(data);
-            console.log(data);
-        })}, [])
 
         useEffect(() => {
             fetch('https://29cu776ppk.execute-api.us-east-1.amazonaws.com/products')
                 .then(response => response.json())
                 .then(data => {
                     setProducts(data);
-                    console.log(data);
             })}, [])
 
 
-    const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
-        if (searchType === 'BY_TITLE'){
-            return fliteredItemsByTitle(items, searchByTitle);
+    const filterBy = (searchType, items, searchByName, searchByCategory) => {
+        if (searchType === 'BY_NAME'){
+            return fliteredItemsByName(items, searchByName);
         } 
         if (searchType === 'BY_CATEGORY'){
             return fliteredItemsByCategory(items, searchByCategory);
         } 
         
-        if (searchType === 'BY_TITLE_AND_BY_CATEGORY'){
-            return fliteredItemsByCategory(items, searchByCategory).filter(item =>item.title.toLowerCase().includes(searchByTitle.toLowerCase()));
+        if (searchType === 'BY_NAME_AND_BY_CATEGORY'){
+            return fliteredItemsByCategory(items, searchByCategory).filter(item =>item.name.toLowerCase().includes(searchByname.toLowerCase()));
         } 
 
         if (!searchType){
@@ -73,8 +64,8 @@ export const ShoppingCartProvider = ({children}) => {
         } 
     }
 
-    const fliteredItemsByTitle = (items, searchByTitle) => {
-        return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()) )
+    const fliteredItemsByName = (items, searchByName) => {
+        return items?.filter(item => item.name.toLowerCase().includes(searchByName.toLowerCase()) )
     }
 
 
@@ -83,11 +74,11 @@ export const ShoppingCartProvider = ({children}) => {
     }
 
     useEffect(() => {
-        if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory));
-        if (searchByCategory && !searchByTitle) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory));
-        if (!searchByCategory && !searchByTitle) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory));
-        if (searchByCategory && searchByTitle) setFilteredItems(filterBy('BY_TITLE_AND_BY_CATEGORY', items, searchByTitle, searchByCategory));
-    },[items, searchByTitle, searchByCategory]);
+        if (searchByName && !searchByCategory) setFilteredItems(filterBy('BY_NAME', items, searchByName, searchByCategory));
+        if (searchByCategory && !searchByName) setFilteredItems(filterBy('BY_CATEGORY', items, searchByName, searchByCategory));
+        if (!searchByCategory && !searchByName) setFilteredItems(filterBy(null, items, searchByName, searchByCategory));
+        if (searchByCategory && searchByName) setFilteredItems(filterBy('BY_NAME_AND_BY_CATEGORY', items, searchByName, searchByCategory));
+    },[items, searchByName, searchByCategory]);
 
     return (
 
@@ -101,7 +92,7 @@ export const ShoppingCartProvider = ({children}) => {
             openShoppingCart, closeShoppingCart,
             order, setOrder,
             items, setItems,
-            searchByTitle, setSearchByTitle,
+            searchByName, setSearchByName,
             filteredItems, setFilteredItems,
             searchByCategory, setSearchByCategory,
             products, setProducts

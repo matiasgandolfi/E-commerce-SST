@@ -10,8 +10,8 @@ const CheckoutSideMenu = () => {
     const context = useContext(ShoppingCartContext);
     const products = context.cartProducts;
 
-    const handleDelete = (id) => {
-        const filteredProducts = context.cartProducts.filter(product => product.id != id );
+    const handleDelete = (sk) => {
+        const filteredProducts = context.cartProducts.filter(product => product.sk != sk );
         context.setCartProducts(filteredProducts);
     }
 
@@ -24,8 +24,23 @@ const CheckoutSideMenu = () => {
         }
         context.setOrder([...context.order, orderToAdd]);
         context.setCartProducts([]);
-        context.setSearchByTitle(null)
+        context.setSearchByName(null)
     }
+
+    const renderButton = () => {
+        if(context.cartProducts.length > 0){
+            return(
+                <Link to="/my-orders/last">
+                    <button className='bg-green-500 w-full py-4 text-white rounded-lg' onClick={() => handleCheckout()}>Checkout</button>
+                </Link>
+            )
+        }
+        else{
+            return(
+                <button className='bg-slate-500 w-full py-4 text-white rounded-lg'>Checkout</button>
+            )
+        }
+    } 
 
 
     return (
@@ -44,10 +59,10 @@ const CheckoutSideMenu = () => {
                 {
                     products.map(product =>(
                         <OrderCard 
-                            key={product.id}
-                            id={product.id}
-                            title={product.title} 
-                            imageUrl={product.images}
+                            key={product.sk}
+                            id={product.sk}
+                            name={product.name} 
+                            imageUrl={product.images[0]}
                             price={product.price}
                             handleDelete={handleDelete}
                         /> 
@@ -61,9 +76,7 @@ const CheckoutSideMenu = () => {
                     <span className='font-light'>Total:</span>
                     <span className='font-medium text-2xl'>${totalPrice(context.cartProducts)}</span>
                 </p>
-                <Link to="/my-orders/last">
-                    <button className='bg-black w-full py-4 text-white rounded-lg' onClick={() => handleCheckout()}>Checkout</button>
-                </Link>
+                {renderButton()}
             </div>
         </aside>
     )

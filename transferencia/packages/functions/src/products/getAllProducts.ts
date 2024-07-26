@@ -57,8 +57,8 @@ const setParams : any = (evento : any) => {
         "#sk": "sk"
       },
       ExpressionAttributeValues: {
-        ":pkPrefix": "PRODUCTOS#Televisor",
-        ":skPrefix" : "LG"
+        ":pkPrefix": "PRODUCTS",
+        ":skPrefix" : "PRODUCT"
       }
     };
     console.log(3)

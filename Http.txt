@@ -1,18 +1,27 @@
 //createProduct
 
 
-PS C:\Users\Matias> $body = @{
-  productoId = "Televisor"
-  productoNombre = "SAMSUNG"
-  estado = $true
-  detalle = "TELEVISOR SAMSUNG TV 50 pulgados"
-  puntuacion = 4.3
-  precio = 500000
-  cantidad = 1
-  cantidadDisponible = 10
-  marca = LG
+
+
+/*--------------------------------CREATE------------------------------------------------------------*/
+
+
+
+$body = @{
+  state = "Available"
+  name = "SONY-S530"
+  detail = "TELEVISOR Sony TV 50 pulgadas"
+  rating = 4.3
+  price = 2000
+  quantityAvailable = 10
+  category = "Televisor"
+  brand = "SONY"
+  images = @(
+    "https://www.sony.com.ar/image/7330e6d37c178d8930475bcc68628ca3?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF",
+    "https://www.sony.com.hn/image/f2c6487074ea1880e9a080c798d01ee5?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF"
+  )
 }
 
 $jsonBody = $body | ConvertTo-Json
 
-Invoke-RestMethod -Method Post -Uri "https://29cu776ppk.execute-api.us-east-1.amazonaws.com/product" -Body $jsonBody -ContentType "application/json"
+Invoke-RestMethod -Method Post -Uri "https://29cu776ppk.execute-api.us-east-1.amazonaws.com/products" -Body $jsonBody -ContentType "application/json"

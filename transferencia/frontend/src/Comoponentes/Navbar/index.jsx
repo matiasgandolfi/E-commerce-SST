@@ -10,7 +10,6 @@ const Navbar = () => {
 
 
     const shoppingCart = () => {
-        console.log('Prueba');
         if(context.isShoppingCartOpen){
             context.setIsShoppingCartOpen(false)         
         } 
@@ -74,11 +73,11 @@ const Navbar = () => {
                 <li className="text-black/60">
                     teff@pruebas.com
                 </li>
-                <li>
+                {/* <li>
                     <NavLink to='/my-order'
                         className={({isActive}) => 
                         isActive ? activeStyle : undefined}>MyOrder</NavLink>
-                </li>
+                </li> */}
                 <li>
                     <NavLink to='/my-orders'
                         className={({isActive}) => 

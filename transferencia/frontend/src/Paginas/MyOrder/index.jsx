@@ -4,9 +4,13 @@ import OrderCard from "../../Comoponentes/OrderCard";
 import { ShoppingCartContext } from "../../Context";
 import { Link } from "react-router-dom";
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
+import { totalPrice } from "../../utils";
 
 
 function MyOrder() {
+
+  console.log("Esta pagina es MyOrder");
+
   const context = useContext(ShoppingCartContext);
   const currentPath = window.location.pathname;
   let index = currentPath.substring(currentPath.lastIndexOf('/')+1);
@@ -25,14 +29,27 @@ function MyOrder() {
         {
             context.order?.[index]?.products.map(product =>(
                 <OrderCard 
-                    key={product.id}
-                    id={product.id}
-                    title={product.title} 
-                    imageUrl={product.images}
+                    key={product.sk}
+                    id={product.sk}
+                    name={product.name} 
+                    imageUrl={product.images[0]}
                     price={product.price}
                 /> 
           ))
         }
+
+        {console.log(context.order)}
+            <hr className="border-black w-4/5 mx-auto p-1"></hr>
+            <div className='px-6 mb-6'>
+                <p className='flex justify-between items-center'>
+                    <span className='font-light'>Total:</span>
+                    <span className='font-medium text-2xl'>$ {totalPrice(context.order?.[index]?.products)}</span>
+                </p>
+                    <button className='bg-green-500 w-full py-4 text-white rounded-lg' onClick={() => handleCheckout()}>Comprar</button>
+            </div>
+        
+
+       
 
       </div>
 
